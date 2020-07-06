@@ -35,6 +35,7 @@ jobs:
           cd packages/ember-cli-fastboot
           npm config set spin false
           npm install -g npm@4
+          npm install
       - name: Run Tests
         run: |
           cd packages/ember-cli-fastboot
