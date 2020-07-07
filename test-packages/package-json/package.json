@@ -1,5 +1,5 @@
 {
-  "name": "test-addon",
+  "name": "package-json-test",
   "version": "0.0.0",
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
