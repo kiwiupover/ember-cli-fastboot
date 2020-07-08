@@ -3,5 +3,8 @@
   "workspaces": [
     "packages/ember-cli-fastboot",
     "test-packages/*"
-  ]
+  ],
+  "scripts": {
+    "test": "cd packages/ember-cli-fastboot && npm run test"
+  }
 }
