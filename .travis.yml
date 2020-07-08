@@ -30,13 +30,11 @@ cache:
   yarn: false # switch to yarn once ember-cli-addon-tests is removed
 
 before_install:
+  - cd packages/ember-cli-fastboot
   - npm config set spin false
   - npm install -g npm@4
 
 install:
-  - cd packages/ember-cli-fastboot
   - npm install
   - yarn --ignore-engines
 
-script:
-  - npm run test
