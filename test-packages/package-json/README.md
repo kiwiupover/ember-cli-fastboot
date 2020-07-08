@@ -1,38 +1,58 @@
-test-addon
-==============================================================================
+# package-json
 
-[Short description of the addon.]
+This README outlines the details of collaborating on this Ember application.
+A short introduction of this app could easily go here.
 
+## Prerequisites
 
-Compatibility
-------------------------------------------------------------------------------
+You will need the following things properly installed on your computer.
 
-* Ember.js v3.12 or above
-* Ember CLI v2.13 or above
-* Node.js v10 or above
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/)
+* [Yarn](https://yarnpkg.com/)
+* [Ember CLI](https://ember-cli.com/)
+* [Google Chrome](https://google.com/chrome/)
 
+## Installation
 
-Installation
-------------------------------------------------------------------------------
+* `git clone <repository-url>` this repository
+* `cd package-json`
+* `yarn install`
 
-```
-ember install test-addon
-```
+## Running / Development
 
+* `ember serve`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
-Usage
-------------------------------------------------------------------------------
+### Code Generators
 
-[Longer description of how to use the addon in apps.]
+Make use of the many generators for code, try `ember help generate` for more details
 
+### Running Tests
 
-Contributing
-------------------------------------------------------------------------------
+* `ember test`
+* `ember test --server`
 
-See the [Contributing](CONTRIBUTING.md) guide for details.
+### Linting
 
+* `yarn lint:hbs`
+* `yarn lint:js`
+* `yarn lint:js --fix`
 
-License
-------------------------------------------------------------------------------
+### Building
 
-This project is licensed under the [MIT License](LICENSE.md).
+* `ember build` (development)
+* `ember build --environment production` (production)
+
+### Deploying
+
+Specify what it takes to deploy your app.
+
+## Further Reading / Useful Links
+
+* [ember.js](https://emberjs.com/)
+* [ember-cli](https://ember-cli.com/)
+* Development Browser Extensions
+  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
+  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
