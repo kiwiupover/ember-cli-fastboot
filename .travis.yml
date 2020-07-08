@@ -35,6 +35,7 @@ before_install:
   - npm install -g npm@4
 
 install:
+  - npm --version
   - npm install
   - yarn --ignore-engines
 
