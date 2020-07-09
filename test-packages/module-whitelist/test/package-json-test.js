@@ -93,7 +93,12 @@ describe('generating package.json', function () {
     it('contains the application config', function () {
       let pkg = fs.readJSONSync("dist/package.json");
 
-      expect(pkg.fastboot.config["module-whitelist"]).to.deep.equal({
+      let config = pkg.fastboot.config["module-whitelist"];
+
+      expect(config.APP.version).to.include("0.0.0");
+
+      delete config.APP.version;
+      expect(config).to.deep.equal({
         modulePrefix: "module-whitelist",
         environment: "development",
         rootURL: "/",
@@ -110,7 +115,6 @@ describe('generating package.json', function () {
         },
         APP: {
           name: "module-whitelist",
-          version: "0.0.0+17dff05f",
           autoboot: false,
         },
         fastboot: {
