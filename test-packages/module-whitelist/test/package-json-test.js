@@ -7,14 +7,12 @@ const execa = require("execa");
 
 chai.use(require('chai-fs'));
 
-let pkg;
-
 describe('generating package.json', function () {
   this.timeout(300000);
 
 
   before(async function () {
-    // await execa("yarn", ["build"]);
+    await execa("yarn", ["build"]);
   });
 
   describe('with FastBoot builds', function () {
@@ -25,9 +23,9 @@ describe('generating package.json', function () {
     });
 
     it('merges FastBoot dependencies from multiple addons', function () {
-      let config = fs.readJSONSync('dist/package.json');
+      let pkg = fs.readJSONSync('dist/package.json');
 
-      expect(config.dependencies).to.deep.equal({
+      expect(pkg.dependencies).to.deep.equal({
         'abortcontroller-polyfill': '^1.4.0',
         'foo': '1.0.0',
         'bar': '^0.1.2',
@@ -96,34 +94,34 @@ describe('generating package.json', function () {
     it('contains the application config', function () {
       let pkg = fs.readJSONSync("dist/package.json");
 
-      expect(pkg.fastboot.config['module-whitelist']).to.deep.equal({
-        modulePrefix: 'module-whitelist',
-        environment: 'development',
-        rootURL: '/',
-        locationType: 'auto',
+      expect(pkg.fastboot.config["module-whitelist"]).to.deep.equal({
+        modulePrefix: "module-whitelist",
+        environment: "development",
+        rootURL: "/",
+        locationType: "auto",
         EmberENV: {
           EXTEND_PROTOTYPES: {
-            Date: false
+            Date: false,
           },
           FEATURES: {},
-          '_APPLICATION_TEMPLATE_WRAPPER': false,
-          '_DEFAULT_ASYNC_OBSERVERS': true,
-          '_JQUERY_INTEGRATION': false,
-          '_TEMPLATE_ONLY_GLIMMER_COMPONENTS': true,
+          _APPLICATION_TEMPLATE_WRAPPER: false,
+          _DEFAULT_ASYNC_OBSERVERS: true,
+          _JQUERY_INTEGRATION: false,
+          _TEMPLATE_ONLY_GLIMMER_COMPONENTS: true,
         },
         APP: {
-          name: 'module-whitelist',
-          version: '0.0.0+6d5ef391',
-          autoboot: false
+          name: "module-whitelist",
+          version: "0.0.0+2dc4a1ea",
+          autoboot: false,
         },
         fastboot: {
           hostWhitelist: [
-            'example.com',
-            'subdomain.example.com',
-            '/localhost:\\d+/'
-          ]
+            "example.com",
+            "subdomain.example.com",
+            "/localhost:\\d+/",
+          ],
         },
-        exportApplicationGlobal: true
+        exportApplicationGlobal: true,
       });
     });
 

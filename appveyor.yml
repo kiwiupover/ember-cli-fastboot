@@ -21,7 +21,7 @@ install:
   - npm config set spin false
 
   # We need to remove test-packages so that the node_modules
-  # don't interfere with the npm install.
+  # don't interfere with the npm install
   - rm -rf test-packages
   - cd packages/ember-cli-fastboot
   - appveyor-retry npm install -g npm@^3
