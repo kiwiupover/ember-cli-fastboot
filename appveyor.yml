@@ -19,6 +19,7 @@ branches:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm config set spin false
+  - rm yarn.lock
   - cd packages/ember-cli-fastboot
   - appveyor-retry npm install -g npm@^3
   - appveyor-retry npm i -g bower # for ember-cli-addon-tests
