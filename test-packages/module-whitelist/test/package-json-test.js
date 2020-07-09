@@ -10,12 +10,11 @@ chai.use(require('chai-fs'));
 describe('generating package.json', function () {
   this.timeout(300000);
 
-
-  before(async function () {
-    await execa("yarn", ["build"]);
-  });
-
   describe('with FastBoot builds', function () {
+
+    before(async function () {
+      await execa("yarn", ["build"]);
+    });
 
     it('builds a package.json', async function () {
       expect("dist/assets/module-whitelist.js").to.be.a.file();
@@ -111,7 +110,7 @@ describe('generating package.json', function () {
         },
         APP: {
           name: "module-whitelist",
-          version: "0.0.0+2dc4a1ea",
+          version: "0.0.0+17dff05f",
           autoboot: false,
         },
         fastboot: {
@@ -167,30 +166,27 @@ describe('generating package.json', function () {
     // });
   });
 
-  // describe('with production FastBoot builds', function () {
+  describe('with production FastBoot builds', function () {
+    before(async function () {
+      await execa("yarn", ["build:prod"]);
+    });
 
-  //   before(function () {
-  //     return app.runEmberCommand('build', '--environment=production');
-  //   });
+    it('contains a manifest of FastBoot assets', function () {
+      let pkg = fs.readJSONSync("dist/package.json");
 
-  //   it('contains a manifest of FastBoot assets', function () {
-  //     let pkg = fs.readJsonSync(app.filePath('/dist/package.json'));
+      let manifest = pkg.fastboot.manifest;
 
-  //     let p = function (filePath) {
-  //       return app.filePath(path.join('dist', filePath));
-  //     };
+      manifest.appFiles.forEach(file => {
+        expect(`dist/${file}`).to.be.a.file();
+      });
 
-  //     let manifest = pkg.fastboot.manifest;
+      expect(`dist/${manifest.htmlFile}`).to.be.a.file();
 
-  //     manifest.appFiles.forEach(function (file) {
-  //       expect(p(file)).to.be.a.file();
-  //     });
-  //     expect(p(manifest.htmlFile)).to.be.a.file();
-  //     manifest.vendorFiles.forEach(function (file) {
-  //       expect(p(file)).to.be.a.file();
-  //     });
-  //   });
-  // });
+      manifest.vendorFiles.forEach(file =>  {
+        expect(`dist/${file}`).to.be.a.file();
+      });
+    });
+  });
 
   // describe('with customized fingerprinting options', function () {
   //   // Tests an app with a custom `assetMapPath` set
@@ -292,15 +288,3 @@ describe('generating package.json', function () {
   //   });
   // });
 });
-
-function addFastBootDeps(app) {
-  return app.editPackageJSON(pkg => {
-    pkg['devDependencies']['fake-addon'] = `*`;
-    pkg['devDependencies']['fake-addon-2'] = `*`;
-    pkg['fastbootDependencies'] = ["rsvp"];
-    pkg['dependencies'] = {
-      rsvp: '3.2.1',
-      'ember-fastboot-build-example': '0.1.2'
-    };
-  });
-}

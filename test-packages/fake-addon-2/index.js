@@ -1,3 +1,3 @@
 module.exports = {
-  name: "Fake Addon"
+  name: "Fake Addon Two"
 };
