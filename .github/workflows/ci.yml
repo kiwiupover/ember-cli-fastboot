@@ -22,29 +22,29 @@ env:
   CI: true
 
 jobs:
-  test-mocha:
-    name: Legacy Mocha Tests
-    runs-on: ubuntu-latest
+  # test-mocha:
+  #   name: Legacy Mocha Tests
+  #   runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [10.x, 12.x]
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install NPM version 4
-        run: |
-          npm config set spin false
-          npm install -g npm@4
-      - name: NPM Install
-        run: npm install
-      - name: Run Mocha Tests
-        run: npm run test:mocha
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: Install NPM version 4
+  #       run: |
+  #         npm config set spin false
+  #         npm install -g npm@4
+  #     - name: NPM Install
+  #       run: npm install
+  #     - name: Run Mocha Tests
+  #       run: npm run test:mocha
 
   test-ember:
     name: Legacy Ember Tests
@@ -66,33 +66,33 @@ jobs:
       - name: Run Tests
         run: npm run test:ember
 
-  test-windows-mocha-node-10:
-    name: Legacy Windows Mocha Tests
-    runs-on: windows-latest
+  # test-windows-mocha-node-10:
+  #   name: Legacy Windows Mocha Tests
+  #   runs-on: windows-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [10.x]
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install NPM version 4
-        run: |
-          npm config set spin false
-          npm install -g npm@4
-      - name: Remove Yarn Lock File
-        run: rm yarn.lock
-      - name: NPM Install
-        run: |
-          npm --version
-          npm install
-      - name: Run Mocha Tests
-        run: npm run test:mocha
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: Install NPM version 4
+  #       run: |
+  #         npm config set spin false
+  #         npm install -g npm@4
+  #     - name: Remove Yarn Lock File
+  #       run: rm yarn.lock
+  #     - name: NPM Install
+  #       run: |
+  #         npm --version
+  #         npm install
+  #     - name: Run Mocha Tests
+  #       run: npm run test:mocha
 
   test-windows-mocha-node-12:
     name: Legacy Windows Mocha Tests
