@@ -89,7 +89,7 @@ jobs:
         run: rm yarn.lock
       - name: Install
         run: |
-          npm -- version
+          npm --version
           yarn --version
           yarn install
       - name: Run Mocha Tests
