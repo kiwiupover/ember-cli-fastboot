@@ -22,49 +22,49 @@ env:
   CI: true
 
 jobs:
-  test-mocha:
-    name: Mocha Tests
-    runs-on: ubuntu-latest
+  # test-mocha:
+  #   name: Mocha Tests
+  #   runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x, 10.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [12.x, 10.x]
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install NPM version 4
-        run: |
-          npm config set spin false
-          npm install -g npm@4
-      - name: NPM Install
-        run: npm install
-      - name: Run Mocha Tests
-        run: npm run test:mocha
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: Install NPM version 4
+  #       run: |
+  #         npm config set spin false
+  #         npm install -g npm@4
+  #     - name: NPM Install
+  #       run: npm install
+  #     - name: Run Mocha Tests
+  #       run: npm run test:mocha
 
-  test-ember:
-    name: Ember Tests
-    runs-on: ubuntu-latest
+  # test-ember:
+  #   name: Ember Tests
+  #   runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x, 10.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [12.x, 10.x]
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: NPM Install
-        run: npm install
-      - name: Run Tests
-        run: npm run test:ember
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: NPM Install
+  #       run: npm install
+  #     - name: Run Tests
+  #       run: npm run test:ember
 
   test-windows-mocha-node:
     name: Windows Mocha Tests
@@ -72,7 +72,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 10.x]
+        node-version: [12.x]
 
     steps:
       - name: Checkout Code
@@ -87,29 +87,30 @@ jobs:
           npm install -g npm@4
       - name: Remove Yarn Lock File
         run: rm yarn.lock
-      - name: NPM Install
+      - name: Install
         run: |
-          npm --version
-          npm install
+          npm -- version
+          yarn --version
+          yarn install
       - name: Run Mocha Tests
         run: npm run test:mocha
 
-  test-windows-ember:
-    name: Windows Ember Tests
-    runs-on: windows-latest
+  # test-windows-ember:
+  #   name: Windows Ember Tests
+  #   runs-on: windows-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [10.x, 12.x]
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: NPM Install
-        run: npm install
-      - name: Run Tests
-        run: npm run test:ember
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - name: NPM Install
+  #       run: npm install
+  #     - name: Run Tests
+  #       run: npm run test:ember
