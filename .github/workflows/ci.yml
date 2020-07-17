@@ -66,13 +66,13 @@ jobs:
       - name: Run Tests
         run: npm run test:ember
 
-  test-windows-mocha:
+  test-windows-mocha-node-10:
     name: Legacy Windows Mocha Tests
     runs-on: windows-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [10.x]
 
     steps:
       - name: Checkout Code
@@ -81,14 +81,44 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install NPM version 3
+      - name: Install NPM version 4
         run: |
           npm config set spin false
-          npm install -g npm@3
+          npm install -g npm@4
       - name: Remove Yarn Lock File
         run: rm yarn.lock
       - name: NPM Install
-        run: npm install
+        run: |
+          npm --version
+          npm install
+      - name: Run Mocha Tests
+        run: npm run test:mocha
+
+  test-windows-mocha-node-12:
+    name: Legacy Windows Mocha Tests
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install NPM version 4
+        run: |
+          npm config set spin false
+          npm install -g npm@4
+      - name: Remove Yarn Lock File
+        run: rm yarn.lock
+      - name: NPM Install
+        run: |
+          npm --version
+          npm install
       - name: Run Mocha Tests
         run: npm run test:mocha
 
