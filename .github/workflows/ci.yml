@@ -22,8 +22,32 @@ env:
   CI: true
 
 jobs:
-  test-legacy:
-    name: Legacy tests
+  test-mocha:
+    name: Legacy Mocha Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install NPM version 4
+        run: |
+          npm config set spin false
+          npm install -g npm@4
+      - name: NPM Install
+        run: npm install
+      - name: Run Mocha Tests
+        run: npm run test:mocha
+
+  test-ember:
+    name: Legacy Ember Tests
     runs-on: ubuntu-latest
 
     strategy:
@@ -44,12 +68,35 @@ jobs:
       - name: NPM Install
         run: npm install
       - name: Run Tests
-        run: npm run test
+        run: npm run test:ember
 
-  test-windows:
-    name: Windows
+  test-windows-mocha:
+    name: Legacy Windows Mocha Tests
     runs-on: windows-latest
-    needs: [test-legacy]
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install NPM version 4
+        run: |
+          npm config set spin false
+          npm install -g npm@4
+      - name: NPM Install
+        run: npm install
+      - name: Run Mocha Tests
+        run: npm run test:mocha
+
+  test-windows-ember:
+    name: Legacy Windows Ember Tests
+    runs-on: windows-latest
 
     strategy:
       matrix:
