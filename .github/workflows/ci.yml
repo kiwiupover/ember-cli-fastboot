@@ -39,6 +39,7 @@ jobs:
         run: |
           npm config set spin false
           npm install -g npm@4
+          npm install
       - name: Run Test
         run: npm run test
 
@@ -60,5 +61,6 @@ jobs:
         run: |
           npm config set spin false
           npm install -g npm@4
+          npm install
       - name: Run Test
         run: npm run test
