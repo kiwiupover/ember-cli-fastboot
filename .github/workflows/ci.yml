@@ -81,10 +81,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install NPM version 4
+      - name: Install NPM version 3
         run: |
           npm config set spin false
-          npm install -g npm@4
+          npm install -g npm@3
+      - name: Remove Yarn Lock File
+        run: rm yarn.lock
       - name: NPM Install
         run: npm install
       - name: Run Mocha Tests
