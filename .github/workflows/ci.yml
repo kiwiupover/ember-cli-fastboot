@@ -61,10 +61,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install NPM version 4
-        run: |
-          npm config set spin false
-          npm install -g npm@4
       - name: NPM Install
         run: npm install
       - name: Run Tests
@@ -109,11 +105,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install NPM version 4
-        run: |
-          npm config set spin false
-          npm install -g npm@4
       - name: NPM Install
         run: npm install
       - name: Run Tests
-        run: npm run test
+        run: npm run test:ember
