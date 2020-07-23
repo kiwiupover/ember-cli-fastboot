@@ -18,6 +18,8 @@
     "release": "release-it",
     "start": "ember serve",
     "test": "mocha && ember test",
+    "test:mocha": "mocha",
+    "test:ember": "ember test",
     "test:precook": "node node_modules/ember-cli-addon-tests/scripts/precook-node-modules.js"
   },
   "dependencies": {
@@ -78,11 +80,8 @@
     "request": "^2.88.0",
     "rsvp": "^4.8.3"
   },
-  "resolutions": {
-    "**/engine.io": "~3.3.0"
-  },
   "engines": {
-    "node": "6.* || 8.* || >= 10.*"
+    "node": "10.* || 12.* || >= 14.*"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
