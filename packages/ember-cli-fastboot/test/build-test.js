@@ -13,10 +13,15 @@ describe('it builds', function() {
 
   let app;
 
-  before(function() {
+  before(async function() {
     app = new AddonTestApp();
 
-    return app.create('dummy');
+    await app.create('dummy', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
+
+    await app.run('npm', 'install');
   });
 
   it('builds into dist by default', function() {
