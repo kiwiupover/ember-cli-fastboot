@@ -8,7 +8,7 @@ const AddonTestApp = require('ember-cli-addon-tests').AddonTestApp;
 
 chai.use(require('chai-fs'));
 
-describe.only('generating package.json', function() {
+describe('generating package.json', function() {
   this.timeout(300000);
 
   let app;
