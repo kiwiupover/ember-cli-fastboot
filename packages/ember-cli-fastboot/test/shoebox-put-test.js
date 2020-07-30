@@ -10,16 +10,17 @@ describe('shoebox - put', function() {
   this.timeout(300000);
 
   let app;
-
-  before(function() {
+  before(async function () {
     app = new AddonTestApp();
+    await app.create('shoebox', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
 
-    return app.create('shoebox')
-      .then(function() {
-        return app.startServer({
-          command: 'serve'
-        });
-      });
+    await app.run('npm', 'install');
+    return app.startServer({
+      command: 'serve'
+    });
   });
 
   after(function() {

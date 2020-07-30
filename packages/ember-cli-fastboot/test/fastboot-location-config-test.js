@@ -10,14 +10,16 @@ describe('FastBootLocation Configuration', function() {
   this.timeout(300000);
 
   let app;
-
-  before(function() {
+  before(async function () {
     app = new AddonTestApp();
 
-    return app.create('fastboot-location-config').then(function() {
-      return app.startServer({
-        command: 'serve'
-      });
+    await app.create('fastboot-location-config', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
+    await app.run('npm', 'install');
+    return app.startServer({
+      command: 'serve'
     });
   });
 

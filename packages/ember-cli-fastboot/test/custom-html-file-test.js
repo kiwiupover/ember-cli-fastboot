@@ -11,15 +11,17 @@ describe('custom htmlFile', function() {
 
   let app;
 
-  before(function() {
+  before(async function() {
     app = new AddonTestApp();
 
-    return app.create('custom-html-file')
-      .then(function() {
-        return app.startServer({
-          command: 'serve'
-        });
-      });
+    await app.create('custom-html-file', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
+    await app.run('npm', 'install');
+    return app.startServer({
+      command: 'serve'
+    });
   });
 
   after(function() {

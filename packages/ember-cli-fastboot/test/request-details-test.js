@@ -25,18 +25,19 @@ describe('request details', function() {
 
   let app;
 
-  before(function() {
-    app = new AddonTestApp();
 
-    return app.create('request', {
+  before(async function() {
+    app = new AddonTestApp();
+    await app.create('request', {
+      emberDataVersion: "3.10.0",
       skipNpm: true
-    })
-      .then(() => injectMiddlewareAddon(app))
-      .then(function() {
-        return app.startServer({
-          command: 'serve'
-        });
-      });
+    });
+
+    await app.run('npm', 'install');
+    await injectMiddlewareAddon(app);
+    return app.startServer({
+      command: 'serve'
+    });
   });
 
   after(function() {

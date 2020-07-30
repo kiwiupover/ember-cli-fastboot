@@ -8,21 +8,22 @@ const AddonTestApp = require('ember-cli-addon-tests').AddonTestApp;
 
 chai.use(require('chai-fs'));
 
-describe('generating package.json', function() {
+describe.only('generating package.json', function() {
   this.timeout(300000);
 
   let app;
 
-  before(function() {
+  before(async function () {
     app = new AddonTestApp();
 
-    return app.create('module-whitelist', {
+    await app.create('module-whitelist', {
+      emberDataVersion: "3.10.0",
       skipNpm: true
-    })
-      .then(addFastBootDeps)
-      .then(function() {
-        return app.run('npm', 'install');
-      });
+    });
+
+    addFastBootDeps(app);
+
+    await app.run('npm', 'install');
   });
 
   describe('with FastBoot builds', function() {
@@ -117,19 +118,18 @@ describe('generating package.json', function() {
     describe('with addon that implements fastbootConfigTree', function() {
       let app;
 
-      before(function() {
+      before(async function () {
         app = new AddonTestApp();
 
-        return app.create('fastboot-config', {
+        await app.create('fastboot-config', {
+          emberDataVersion: "3.10.0",
           skipNpm: true
-        })
-          .then(addFastBootDeps)
-          .then(function() {
-            return app.run('npm', 'install');
-          })
-          .then(function() {
-            return app.runEmberCommand('build');
-          });
+        });
+
+        addFastBootDeps(app);
+
+        await app.run('npm', 'install');
+        await app.runEmberCommand('build');
       });
 
       it('it extends the application config', function() {
@@ -178,12 +178,15 @@ describe('generating package.json', function() {
   describe('with customized fingerprinting options', function() {
     // Tests an app with a custom `assetMapPath` set
     let customApp = new AddonTestApp();
+    before(async function () {
 
-    before(function() {
-      return customApp.create('customized-fingerprinting')
-        .then(function() {
-          return customApp.runEmberCommand('build', '--environment=production');
-        });
+      await customApp.create('customized-fingerprinting', {
+        emberDataVersion: "3.10.0",
+        skipNpm: true
+      });
+
+      await app.run('npm', 'install');
+      await customApp.runEmberCommand('build', '--environment=production');
     });
 
     it('respects a custom asset map path and prepended URLs', function() {
@@ -222,11 +225,14 @@ describe('generating package.json', function() {
     // Tests an app with a custom `outputPaths` set
     let customApp = new AddonTestApp();
 
-    before(function() {
-      return customApp.create('customized-outputpaths')
-        .then(function() {
-          return customApp.runEmberCommand('build');
-        });
+    before(async function () {
+      await customApp.create('customized-outputpaths', {
+        emberDataVersion: "3.10.0",
+        skipNpm: true
+      });
+
+      await app.run('npm', 'install');
+      await customApp.runEmberCommand('build');
     });
 
     it('respects custom output paths and maps to them in the manifest', function() {
@@ -254,12 +260,15 @@ describe('generating package.json', function() {
     this.timeout(300000);
 
     let customApp = new AddonTestApp();
+    before(async function () {
 
-    before(function() {
-      return customApp.create('custom-html-file')
-        .then(function() {
-          return customApp.runEmberCommand('build', '--environment=production');
-        });
+      await customApp.create('custom-html-file', {
+        emberDataVersion: "3.10.0",
+        skipNpm: true
+      });
+
+      await app.run('npm', 'install');
+      await customApp.runEmberCommand('build', '--environment=production');
     });
 
     it('uses custom htmlFile in the manifest', function() {
