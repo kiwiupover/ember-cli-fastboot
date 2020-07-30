@@ -36,7 +36,7 @@ function getVersionChecker(context) {
  * Main entrypoint for the Ember CLI addon.
  */
 module.exports = {
-  name: require('./package').name
+  name: require('./package').name,
 
   init() {
     this._super.init && this._super.init.apply(this, arguments);
