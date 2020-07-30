@@ -11,13 +11,15 @@ describe('dynamic initializers', function() {
 
   let  app;
 
-  before(function() {
+  before(async function() {
     app = new AddonTestApp();
 
-    return app.create('dynamic-initializers')
-      .then(function() {
-        return app.runEmberCommand('build');
-      });
+    await app.create('dynamic-initializers', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
+    await app.run('npm', 'install');
+    return app.runEmberCommand('build')
   });
 
   it('filters FastBoot initializers from browser build', function() {

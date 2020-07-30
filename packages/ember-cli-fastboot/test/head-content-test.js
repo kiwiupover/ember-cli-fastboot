@@ -10,19 +10,20 @@ describe('head content acceptance', function() {
   this.timeout(300000);
 
   let app;
-
-  before(function() {
+  before(async function () {
     app = new AddonTestApp();
 
-    return app.create('head-content', {
+    await app.create('head-content', {
+      emberDataVersion: "3.10.0",
       skipNpm: true
-    })
-      .then(addDependencies)
-      .then(function() {
-        return app.startServer({
-          command: 'serve'
-        });
-      });
+    });
+
+    addDependencies(app);
+
+    await app.run('npm', 'install');
+    return app.startServer({
+      command: 'serve'
+    });
   });
 
   after(function() {
@@ -48,5 +49,4 @@ function addDependencies(app) {
   app.editPackageJSON(function(pkg) {
     pkg['devDependencies']['ember-cli-head'] = "0.3.1";
   });
-  return app.run('npm', 'install');
 }

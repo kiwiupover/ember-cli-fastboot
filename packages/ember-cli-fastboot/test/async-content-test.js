@@ -12,15 +12,15 @@ describe('async content via deferred content', function() {
 
   let app;
 
-  before(function() {
+  before(async function() {
     app = new AddonTestApp();
 
-    return app.create('async-content')
-      .then(function() {
-        return app.startServer({
-          command: 'serve'
-        });
-      });
+    await app.create('async-content', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    })
+    await app.run('npm', 'install');
+    return app.startServer({command: 'serve'});
   });
 
   after(function() {

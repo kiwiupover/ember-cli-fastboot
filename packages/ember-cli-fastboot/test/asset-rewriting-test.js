@@ -11,21 +11,25 @@ describe('rewriting HTML', function() {
 
   let app;
 
-  before(function() {
+  before(async function() {
     app = new AddonTestApp();
 
-    return app.create('dummy');
+    await app.create('dummy', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
+
+    await app.run('npm', 'install');
   });
 
-  it('builds an index.html that points to the browser build', function() {
-    return app.runEmberCommand('build', '--environment=production')
-      .then(function() {
-        let appPath = glob.sync(app.filePath('dist/assets/dummy-*.js'))[0];
-        let matches = appPath.match(/dist\/assets\/dummy-(.*).js/);
-        let appSHA = matches[1];
+  it('builds an index.html that points to the browser build', async function() {
+    await app.runEmberCommand('build', '--environment=production');
 
-        expect(app.filePath('dist/index.html')).to.have.content.that.match(new RegExp(appSHA));
-      });
+    let appPath = glob.sync(app.filePath('dist/assets/dummy-*.js'))[0];
+    let matches = appPath.match(/dist\/assets\/dummy-(.*).js/);
+    let appSHA = matches[1];
+
+    expect(app.filePath('dist/index.html')).to.have.content.that.match(new RegExp(appSHA));
   });
 
 });
