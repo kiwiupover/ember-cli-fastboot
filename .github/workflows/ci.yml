@@ -51,7 +51,7 @@ jobs:
           npm --version
           yarn test:mocha
 
-  test-mocha:
+  test-mocha-node-10:
     name: Mocha Tests - ${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
