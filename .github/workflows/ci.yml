@@ -27,8 +27,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: 10
-        experimental: false
+        node: [10]
+        experimental: [false]
         include:
           - node: 12
             experimental: true
