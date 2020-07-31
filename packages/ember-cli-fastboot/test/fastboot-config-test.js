@@ -14,13 +14,13 @@ describe('FastBoot config', function() {
   before(async function () {
     app = new AddonTestApp();
 
-    await app.create('fastboot-config', {
+    await app.create("fastboot-config", {
       emberDataVersion: "3.10.0",
-      skipNpm: true
+      skipNpm: true,
     });
-    await app.run('npm', 'install');
+    await app.run("npm", "install");
     return app.startServer({
-      command: 'serve'
+      command: "serve",
     });
   });
 

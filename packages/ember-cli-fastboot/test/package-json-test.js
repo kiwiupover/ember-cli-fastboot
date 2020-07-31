@@ -121,7 +121,7 @@ describe('generating package.json', function() {
       before(async function () {
         app = new AddonTestApp();
 
-        await app.create('fastboot-config', {
+        await app.create('package-json', {
           emberDataVersion: "3.10.0",
           skipNpm: true
         });
