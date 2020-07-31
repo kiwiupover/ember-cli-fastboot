@@ -11,15 +11,17 @@ describe('error handler acceptance', function() {
 
   let app;
 
-  before(function() {
+  before(async function() {
     app = new AddonTestApp();
 
-    return app.create('error-handler')
-      .then(function() {
-        return app.startServer({
-          command: 'serve'
-        });
-      });
+    await app.create('error-handler', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
+    await app.run('npm', 'install');
+    return app.startServer({
+      command: 'serve'
+    });
   });
 
   after(function() {

@@ -11,15 +11,17 @@ describe('rootUrl acceptance', function() {
 
   let app;
 
-  before(function() {
+  before(async function () {
     app = new AddonTestApp();
+    await app.create('root-url', {
+      emberDataVersion: "3.10.0",
+      skipNpm: true
+    });
 
-    return app.create('root-url')
-      .then(function() {
-        return app.startServer({
-          command: 'serve'
-        });
-      });
+    await app.run('npm', 'install');
+    return app.startServer({
+      command: 'serve'
+    });
   });
 
   after(function() {
